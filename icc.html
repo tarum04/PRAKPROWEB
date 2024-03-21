@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence Creation Form</title>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="ic1.css">
+
+</head>
+<body>
+    <form class="ic-form" id="ic-form">
+        <!-- Deskripsi Masalah  -->
+        <label for="deskripsi-masalah">Deskripsi Masalah : </label>
+        <textarea placeholder="Masukkan deskripsi terkait masalah" name="masalah" id="masalah" cols="60" rows="5" class="masalah"></textarea>
+        
+        <!-- Deskripsi Fitur -->
+        <label for="deskripsi-fitur">Deskripsi Fitur : </label>
+        <textarea placeholder="Masukkan deskripsi-fitur" name="fitur" id="fitur" cols="60" rows="5" class="fitur"></textarea>
+        
+        <!-- Deskripsi Label -->
+        <label for="deskripsi-label">Deskripsi Label : </label>
+        <textarea placeholder="Masukkan deskripsi label" name="label" id="label" cols="40" rows="5" class="label"></textarea>
+
+        <div class="category-problems">
+            <!-- Kategori Masalah -->
+            <div class="label-category">
+                <label for="kategori-masalah">Kategori Masalah : </label>
+            </div>
+            <select name="kategori" id="kategori">
+                <option value="Pilih Kategori">--Pilih Kategori--</option>
+                <option value="Klasifikasi">Klasifikasi</option>
+                <option value="Prediksi">Prediksi</option>
+                <option value="Prediksi Probabilistik">Prediksi Probabilistik</option>
+                <option value="Deteksi">Deteksi</option>
+                <option value="Rekognisi">Rekognisi</option>
+            </select>
+        </div>
+
+        <!-- Tanggal Mulai -->
+        <label for="start-date">Awal Tanggal : </label>
+        <input type="date" name="awal" id="tanggal-awal">
+
+        <!-- Akhir Waktu -->
+        <label for="last-date">Akhir Tanggal : </label>
+        <input type="date" name="akhir" id="tanggal-akhir">
+
+        <div class="status-info">
+             <!-- Status Penyelesaian -->
+             <div class="status-category">
+                <label for="status">Status Penyelesaian : </label>
+             </div>
+            <select name="status" id="status">
+                <option value="Pilih Status">--Pilih Status--</option>
+                <option value="Selesai">Selesai</option>
+                <option value="Berlangsung">Berlangsung</option>
+                <option value="Gagal">Gagal</option>
+            </select>
+        </div>
+
+        <!-- Catatan -->
+        <label for="catatanAkhir">Deskripsi Catatan : </label>
+        <textarea placeholder="Masukkan Catatan" name="catatan" id="catatan" cols="60" rows="5" class="catatan"></textarea>
+
+        <button type="submit">SUBMIT</button>
+
+        <!-- POP UP -->
+        <div class="pop-up"></div>
+
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#ic-form').submit(function(event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser.
+
+
+            let isValid = true; // Flag for validation state.
+            // const password = $('#password').val().trim();
+            // const confirmPassword = $('#confirmPassword').val().trim();
+
+
+            // Define array of inputs to validate.
+            const inputs = ['#masalah', '#fitur', '#label', '#catatan'];
+            const currentTime = new Date();
+            // Loop through inputs for validation.
+            inputs.forEach(function(input) {
+                const $input = $(input);
+                if ($input.val().trim() === "") {
+                    $input.css('borderColor', 'red'); // Change border to red if empty.
+                    alert(`Isian kolom ${$input.attr('name')} tidak boleh kosong`); // Alert for empty input.
+                    isValid = false; // Update validation flag.
+                    return false; // Break out of the loop.
+                } else {
+                    $input.css('borderColor', ''); // Reset border if input is filled.
+                }
+            });
+
+            if (isValid) {
+                const lastCurrentTime = currentTime;
+                alert(`Entry Berhasil \n
+                Waktu Penyimpanan = ${currentTime} \n
+                Waktu Akhir Penyimpanan = ${lastCurrentTime}`);
+                // Uncomment the next line to actually submit the form.
+                // this.submit(); // Submit form if all inputs are valid.
+            }
+        });
+    });
+</script>
+</body>
+</html>
